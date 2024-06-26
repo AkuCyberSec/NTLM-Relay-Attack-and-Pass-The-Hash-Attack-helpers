@@ -22,22 +22,23 @@ Feel free to translate the scripts in whatever programming language you like.
 
 ## How the scripts work?
 ### autorun_crackmapexec_with_ntlmrelayx.py
-To run this script we need Responder, impacket-ntlmrelayx, crackmapexec and proxychains.
+To run this script we need **Responder**, **impacket-ntlmrelayx** (aka **ntlmrelayx.py**), **crackmapexec** and **proxychains**.  
 First we need setup and run Responder for the poisoning:
-1. Edit Responder.conf (default location on Kali: /etc/responder/Responder.conf)
-2. Disable SMB Server by replacing the line "SMB = On" with "SMB = Off"
+1. Edit Responder.conf (default location on Kali: **/etc/responder/Responder.conf**)
+2. Disable SMB Server by replacing the line **"SMB = On"** with **"SMB = Off"**
 3. Run Responder
 
 Then, we need to run impacket-ntlmrelayx for the NTLM Relay Attack.  
 Remember to use the flag **-socks** to enable the SOCKS proxy for the relayed connections.  
 
 The SOCKS proxy listens on port **1080**, so we need to setup **proxychains** to use it:
-1. Edit /etc/proxychains4.conf
-2. In the section [Proxylist] set: **socks4 127.0.0.1 1080**
+1. Edit **/etc/proxychains4.conf**
+2. In the section **[Proxylist]** set:  
+``socks4 127.0.0.1 1080``
 
 Once the environment is setup, we can run the Python script (no arguments required).  
 The script makes an HTTP GET request to **http://localhost:9090/ntlmrelayx/api/v1.0/relays**.  
-This endpoint returns a 2D Array, and each array contains the following information:
+This endpoint returns a 2D Array, and each array contains the following information:  
 0. Protocol (SMB)
 1. Target (the IP Address of the target)
 2. Username (Domain/Username)
