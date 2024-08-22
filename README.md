@@ -46,7 +46,7 @@ This endpoint returns a 2D Array, and each array contains the following informat
 4. Port (445)
 
 The script runs **crackmapexec** to list all the directories:    
-``proxychains -q crackmapexec smb {ipAddress} -d '{domain}' -u '{username}' -p '' --hashes > {filename}``
+``proxychains -q crackmapexec smb {ipAddress} -d '{domain}' -u '{username}' -p '' --shares > {filename}``
 
 Then runs **crackmapexec** to dump the NTLM Hashes if the AdminStatus is True:  
 ``proxychains -q crackmapexec smb {ipAddress} -d '{domain}' -u '{username}' -p '' --sam > {filename}``
